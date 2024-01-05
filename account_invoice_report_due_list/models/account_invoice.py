@@ -27,7 +27,7 @@ class AccountInvoice(models.Model):
         date_format = self.env['res.lang']._lang_get(lang).date_format
         for invoice in self:
             invoice.multi_date_due = ' '.join(
-                fields.Date.from_string(due[0]).strftime(date_format)
+                fields.Date.from_string(due[0]).strftime(date_format) if due[0] else ''
                 for due in invoice.get_multi_due_list())
 
     def get_multi_due_list(self):
